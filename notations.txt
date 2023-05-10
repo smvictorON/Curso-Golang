@@ -1,0 +1,129 @@
+*** Golang ***
+
+- Linguagem criada e mantida pelo google, com vantagem de ser
+Simples e Robusta trabalhando com threads concorrentes
+
+- Funções são compartilhadas entre pacotes
+
+- Para um arquivo ser 'executavél' deve conter o pacote main
+com uma função main
+
+Módulo = conjuto de pacotes externos e internos executamos o comando
+"go mod init nomedoseumodulo"
+para criar seu modulo o arquivo go.mod pode ser comparado com
+o package.json, executando o comando "go build"
+ele cria uma arquivo com o resultado da compilação do seu código
+para executar esse arquivo buildado, se estiver na mesma pasta é
+"./modulo"
+
+*** No caso do curso como vamos fazer varios projetos na mesma pasta
+é romendado rodar o comando "go work init"
+na raiz do projeto e depois rodar o comando
+"go work use nomedapastadaaula"
+para que ele entenda o escopo que é para se usar!
+
+*** Precisamos colocar a primera letra da função/struct maiuscula
+para que ela seja compartilhada, tipo uma função publica, e letra
+minuscula para que seja privada(somente no mesmo pacote)
+
+é uma boa pratica sempre faze um comentário na linha de cima a
+declaração de uma função
+
+"go install" é semelhenta ao "go build" porém o install salva o
+arquivo compilado, onde o go foi instalado
+
+quando voce precisar usar algum médito de um módulo importado
+é só pegar o ultimo nome depois da barra na importaçao
+
+o comando "go mod tidy" limpa todos os pacotes externos que nao
+estao sendo usados na aplicação
+
+go pode ter mais de um retorno para funções, assim quando a
+função for chamada terá que receber os resultados em mais de
+uma variável, ou utilizar _
+
+no go nao podemos fazer calculos aritmeticos com variaveis de
+tipos diferentes, mesmo que as duas sejam numericas
+
+não existe operador ternário em go
+
+struct em go seria como se fosse uma interface/objeto em js
+e para passarmos só o valor de um campo da struct devemos
+declarar qual campo estamos passando
+
+go nao tem herança porém posso definir que um campo da minha
+struct receba uma struct e assim posso acessar esses campos
+normalmente
+
+quando é criado uma variavel no go ele aloca um espaço de memória
+pra ela, e criando uma variavel ponteiro e atribuindo outra variavel
+com & ele vai guardar o local de onde a primeira variavel esta alocada,
+e se quisermos ver o valor de onde esse ponteiro esta apontando
+devemos usar o * para desrefenciar
+
+** valor vazio de um ponteiro é nil
+
+no go para declarar um array é obrigatorio dizer o tamanho do array,
+temos tambem o slice que nao precisa ser definido o tamanho, o append
+do slice retorna um novo slice mais o item novo, o slice funciona como
+se fosse um ponteiro, se criarmos um slice de um array, se modificarmos
+o array o slice vai ser modificado tambem
+
+** funçao make aloca um pedaço na memoria para algo na nossa aplicacao
+
+no go temos o map como estrutura para gardar valores, porém é mais
+engessado do que a struct pelos tipos definidos
+
+** no go trabalhando com switch podemos usar a flag fallthrough para
+pular para o proximo caso do switch, e tambem não precisamos usar a
+flag break, ele sai automaticamente ao cair no caso se nao tiver o
+fallthrough
+
+no go só temos o for como estrutra de repetição, mas podemos usar de
+diversas formas, conseguimos utilizar o range no for para itirar em
+arrays com o indice e valor de cada elemento
+
+utilizamos a tag "go" para executar mais deu uma tarefa ao mesmo tempo
+
+se importarmos um pacote com . na frente do import ex . "seuimport",
+o go entende que as funções desse pacote estao no mesmo pacote evitando
+de ter que colocar o nomedoseupacote.suafunçao
+
+omitempty na struct é uma flag para nao passar o campo para o json
+caso esteja em branco
+
+no go para lermos variaveis de ambiente usando o pacote dotenv
+
+--- Testes
+
+- O teste de uma função nunca fica no mesmo arquivo
+- Os arquivos de teste precisam seguir o padrao seufuncao_test.go
+- O nome da função deve começar com Test, ex TestSuaFunçao(t *testing.T)
+- Para executar um teste basta entrar na pasta onde está o arquivo e
+rodar "go test", ou ficar na raiz e executar "go test ./..." para executar
+todos os testes, se voce rodar 2x o mesmo teste sem alterar o resultado vai
+ficar em cache o golang nao vai rodar o teste de novo
+- Colocando -v no comando de teste quer dizer que voce que um retorno mais
+verboso com nome da função
+- Colocando t.Parallel() no inicio de cada test, faz com que os testes rodem
+em paralelo
+- Colocando o -cover no comando do go test ele retorna quanto do nosso código
+está sendo testado
+- Colocando o -coverprofile nomedoarquivo.txt no comando do go test ele retorna
+um arquivo com as informações de cobertura dos testes, porem esse arquivo nao é
+muito legivel, para lermos ele, devemos executar o comando
+"go tool cover --func=nomedoarquivo.txt"
+- Para a gente poder saber qual parte do código não está testada tem um comando
+muito legal que é "go tool cover --html=nomedoarquivo.txt" que gerar um html
+temporario no computador com as linhas nao testadas em vermelho!
+
+
+--- Estrutura
+
+um tipo de estrutura usada com golang e outra aplicações é
+
+Controller, lidam com requisições -> Application
+Application, lidam com as regras e calculos da aplicacao -> Repository
+Repository, lidam com operações com a base de dados
+
+Domain/Model -> estrutura dos dados na aplicacao

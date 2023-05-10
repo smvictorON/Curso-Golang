@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    h2{
+      font-weight: lighter;
+    }
+  </style>
+  <title>Document</title>
+  <script>
+    function showLog(){
+      alert("Executou")
+    }
+  </script>
+</head>
+
+
+<body>
+  <h2 style="color: grey">Bem vindo</h2>
+  <p>Nome:{{.Nome}}</p>
+  <p>Email:{{.Email}}</p>
+
+  <button onclick="showLog()">Clique aqui!</button>
+</body>
+</html>
